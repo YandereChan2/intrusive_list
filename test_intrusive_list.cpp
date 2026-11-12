@@ -1,3 +1,7 @@
+// 测试的全部检查都在 assert 里；Release（NDEBUG）下也要生效，否则等于不测
+#ifdef NDEBUG
+#  undef NDEBUG
+#endif
 #include "intrusive_list.h"
 
 #include <algorithm>
