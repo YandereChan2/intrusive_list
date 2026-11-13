@@ -192,6 +192,10 @@ Yc::basic_intrusive_list<fancy_ptr<void>>  // 节点指针是 fancy_ptr<intrusiv
 [`Yc::list_without_size`](https://github.com/YandereChan2/list_without_size) 会从
 `Alloc::void_pointer` 推导 `vptr`）才需要关心它。
 
+> 实现"自相对"指针（偏移相对指针对象自身地址）时，换算要用整型算术
+> （`uintptr_t`），不要用 `char*` 指针加减：指向对象之外属于未定义行为，
+> 优化器可以据此推出错误结论。`boost::interprocess::offset_ptr` 也是这么做的。
+
 ## 与 `std::list` 的关系
 
 本库是**底层设施**：不分配、不拥有、不构造元素，接口以 _节点_ 为单位。
